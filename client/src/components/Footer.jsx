@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer>
-      <p>React Post Browser - Michael Cowley</p>
+      <p>Post Browser - Michael Cowley</p>
     </footer>
   );
 }

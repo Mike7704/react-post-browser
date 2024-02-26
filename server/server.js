@@ -49,7 +49,12 @@ app.get("/posts", async (req, res) => {
     }
     // Return all posts if no category paramater
     else {
-      const result = await db.query("SELECT * FROM posts");
+      const result = await db.query(`
+        SELECT posts.*, categories.category AS category
+        FROM posts
+        JOIN categories ON posts.category_id = categories.id
+        ORDER BY id
+      `);
       res.status(200).json(result.rows);
     }
   } catch (error) {

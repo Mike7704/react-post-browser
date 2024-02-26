@@ -27,6 +27,10 @@ header h1 {
   padding: 10px;
 }
 
+.title {
+  text-decoration: underline;
+}
+
 .page-content {
   display: flex;
   flex-direction: column;
@@ -44,9 +48,13 @@ footer {
 }
 
 /* Resize elements for smaller screens */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   header {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .nav-bar {
+    gap: 45px;
   }
 
   footer {

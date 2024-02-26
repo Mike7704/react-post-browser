@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -19,6 +18,7 @@ function App() {
       <NavBar />
       <div className="page-content">
         <Routes>
+          <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/viewposts" element={<ViewPosts />} />
           <Route path="/newpost" element={<NewPost />} />

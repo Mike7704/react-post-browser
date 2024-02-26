@@ -30,7 +30,10 @@ VALUES
 ('Music'),
 ('Science'),
 ('Food'),
-('Movie');`);
+('Movie'),
+('Gaming'),
+('Work'),
+('Other');`);
 
 // Insert posts data
 db.query(`INSERT INTO posts (title, content, category_id)

@@ -1,0 +1,16 @@
+.new-post-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 94vw;
+}
+
+form input {
+  padding: 5px;
+}
