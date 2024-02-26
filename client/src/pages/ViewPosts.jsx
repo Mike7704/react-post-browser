@@ -73,9 +73,9 @@ function ViewPosts() {
   return (
     <div className="view-posts-page">
       <h1 className="title">Posts</h1>
-      <div className="filters-container">
+      <div className="categories-container">
         <h3>View Category: </h3>
-        <CategorySelect value={filterCategory} onChange={updateCategoryFilter} />
+        <CategorySelect value={filterCategory} onChange={updateCategoryFilter} showAllOption={true} />
       </div>
       <div className="posts-container">
         {posts.map((post) => (

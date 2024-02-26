@@ -4,13 +4,13 @@
   align-items: center;
 }
 
-.filters-container {
+.categories-container {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.filters-container select {
+.categories-container select {
   padding: 5px;
 }
 

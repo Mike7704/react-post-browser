@@ -2,28 +2,41 @@ import { useState } from "react";
 import CategorySelect from "../components/CategorySelect";
 import "./NewPost.css";
 
+const baseURL = import.meta.env.VITE_SERVERURL;
+
 function NewPost() {
-  // form values with initial values
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-  });
-  const [filterCategory, setFilterCategory] = useState("All");
+  const [categorySelect, setCategorySelect] = useState("Food");
+  const [infoMessage, setInfoMessage] = useState("");
 
-  function submitPost(event) {
+  const updateCategorySelect = (event) => {
+    setCategorySelect(event.target.value);
+  };
+
+  // Create a post and add it to the posts database
+  const submitPost = async (event) => {
     event.preventDefault();
-    console.log("The form values are", formValues);
-  }
+    // Read form data (title, content, category)
+    const formData = new FormData(event.target);
+    const postData = {
+      title: formData.get("title"),
+      content: formData.get("content"),
+      category: categorySelect,
+    };
 
-  function handleInputChange(event) {
-    setFormValues({
-      ...formValues, // the spread operator will add all existing values
-      [event.target.name]: event.target.value, // then we add the new value using the form field "name" attribute and the value
+    // Send data to server to add a new post to the database
+    const response = await fetch(`${baseURL}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
     });
-  }
-
-  const updateCategoryFilter = (event) => {
-    setFilterCategory(event.target.value);
+    if (response.ok) {
+      setInfoMessage("Post sent");
+    } else {
+      setInfoMessage("Failed to send post");
+      console.error("Failed to send post");
+    }
   };
 
   return (
@@ -31,17 +44,16 @@ function NewPost() {
       <h1 className="title">Add a new post</h1>
       <form onSubmit={submitPost}>
         <label htmlFor="title">Title:</label>
-        <input type="text" id="title" name="title" maxLength={25} value={formValues.title} onChange={handleInputChange} />
+        <input type="text" id="title" name="title" required maxLength={25} />
         <label htmlFor="content">Content:</label>
-        <input type="text" id="content" name="content" maxLength={150} value={formValues.content} onChange={handleInputChange} />
-        <p>Current value is: {formValues.title}</p>
-        <p>Current value is: {formValues.content}</p>
+        <input type="text" id="content" name="content" required maxLength={100} />
+        <div className="categories-container">
+          <p>Category: </p>
+          <CategorySelect value={categorySelect} onChange={updateCategorySelect} showAllOption={false} />
+        </div>
         <button type="submit">Submit</button>
       </form>
-      <div className="filters-container">
-        <p>Category: </p>
-        <CategorySelect value={filterCategory} onChange={updateCategoryFilter} />
-      </div>
+      <p>{infoMessage}</p>
     </div>
   );
 }

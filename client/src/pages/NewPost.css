@@ -7,10 +7,11 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   width: 94vw;
 }
 
 form input {
   padding: 5px;
+  margin-bottom: 10px;
 }
